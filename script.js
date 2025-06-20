@@ -1,4 +1,5 @@
 const task =[];
+const taskSave={};
 function addTask() {
     const inputName = document.querySelector('.input-task');
     const inputDate = document.querySelector('.input-date');
@@ -15,8 +16,9 @@ function addTask() {
         date: date
     };
 
-    task.push(taskWithDate);
 
+    task.push(taskWithDate);
+    localStorage.setItem('taskList',JSON.stringify(task));
     inputName.value = '';
     inputDate.value = '';
     
@@ -32,11 +34,21 @@ function displayTodoList(){
             <button class="delete-button" onclick="deleteTask(${i})">Delete</button>`;    
 
     }
+    console.log(task_list);
     document.querySelector('.tasks').innerHTML = task_list;
 }
 
 function deleteTask(i){
     task.splice(i,1);
+    localStorage.setItem('taskList',JSON.stringify(task));
     displayTodoList();
 }
 
+window.addEventListener('load',()=>{
+    const storedTasks = localStorage.getItem('taskList');
+    if(storedTasks){
+        const parsedTasks = JSON.parse(storedTasks);
+        task.push(...parsedTasks);
+        displayTodoList();
+    }
+});
