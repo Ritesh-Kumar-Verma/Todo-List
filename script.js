@@ -27,14 +27,11 @@ function addTask() {
 
 function displayTodoList(){
     let task_list = '';
-    for(let i = 0 ; i<task.length; i++){
-        taskobject = task[i];
-        task_list+=`<div>${taskobject.name}</div>
-            <div>${taskobject.date}</div> 
-            <button class="delete-button" onclick="deleteTask(${i})">Delete</button>`;    
-
-    }
-    // console.log(task_list);
+    task.forEach(function(taskObject,i){
+        task_list+=`<div>${taskObject.name}</div>
+            <div>${taskObject.date}</div> 
+            <button class="delete-button" onclick="deleteTask(${i})">Delete</button>`;
+    });
     document.querySelector('.tasks').innerHTML = task_list;
 }
 
