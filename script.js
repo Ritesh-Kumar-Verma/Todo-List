@@ -34,7 +34,7 @@ function displayTodoList(){
             <button class="delete-button" onclick="deleteTask(${i})">Delete</button>`;    
 
     }
-    console.log(task_list);
+    // console.log(task_list);
     document.querySelector('.tasks').innerHTML = task_list;
 }
 
@@ -46,8 +46,10 @@ function deleteTask(i){
 
 window.addEventListener('load',()=>{
     const storedTasks = localStorage.getItem('taskList');
+    // console.log(typeof storedTasks);
     if(storedTasks){
         const parsedTasks = JSON.parse(storedTasks);
+        console.log(parsedTasks);
         task.push(...parsedTasks);
         displayTodoList();
     }
